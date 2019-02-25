@@ -1,4 +1,4 @@
-# vue-typescript-sample
+# wterminal
 
 ## Project setup
 ```
