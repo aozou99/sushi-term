@@ -1,6 +1,13 @@
 <template>
   <p ref="line">
-    <span ref="prefix">{{prefix}}</span><input type="text" v-model="command" @keyup="onKeyUp" ref="input" :style="{width: width()}"/>
+    <span ref="prefix">{{ prefix }}</span
+    ><input
+      type="text"
+      v-model="command"
+      @keyup="onKeyUp"
+      ref="input"
+      :style="{ width: width() }"
+    />
   </p>
 </template>
 
@@ -33,6 +40,9 @@ export default class InputLine extends Vue {
   @Emit()
   public enter(command: string, prefix: string) {}
 
+  @Watch("command")
+  public convertEmoji() {}
+
   public onKeyUp(event: KeyboardEvent) {
     switch (event.key.toLowerCase()) {
       case "enter":
@@ -48,11 +58,11 @@ export default class InputLine extends Vue {
 </script>
 <style scoped>
 input {
-    background-color: black;
-    border-width: 0px;
-    padding: 0;
-    font: inherit;
-    color: inherit;
-    outline: 0;
+  background-color: black;
+  border-width: 0px;
+  padding: 0;
+  font: inherit;
+  color: inherit;
+  outline: 0;
 }
 </style>

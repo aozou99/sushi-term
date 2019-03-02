@@ -1,6 +1,10 @@
 <template>
   <div id="app">
-    <HistoryLine v-for="(line, index) in history" :key="index" v-bind="line"></HistoryLine>
+    <HistoryLine
+      v-for="(line, index) in history"
+      :key="index"
+      v-bind="line"
+    ></HistoryLine>
     <InputLine @enter="exec" />
   </div>
 </template>
@@ -10,16 +14,16 @@ import { Component, Vue, Watch, Prop } from "vue-property-decorator";
 import InputLine from "./components/InputLine.vue";
 import HistoryLine from "./components/HistoryLine.vue";
 @Component({
-  components: { 
+  components: {
     InputLine,
-    HistoryLine,
+    HistoryLine
   }
 })
 export default class Terminal extends Vue {
   private history: Array<object> = [];
 
-  public exec(command: string, prefix:string) {
-    this.history.push({command, prefix});
+  public exec(command: string, prefix: string) {
+    this.history.push({ command, prefix });
   }
 }
 </script>

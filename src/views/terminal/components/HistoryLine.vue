@@ -1,5 +1,5 @@
 <template>
-    <p class="history-line">{{prefix}} {{command}}</p>
+  <p class="history-line">{{ prefix }} {{ command }}</p>
 </template>
 
 <script lang="ts">
