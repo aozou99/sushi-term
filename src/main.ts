@@ -1,8 +1,8 @@
 import Vue from "vue";
-import App from "./App.vue";
+import Terminal from "./views/terminal/Terminal.vue";
 
 Vue.config.productionTip = false;
 
 new Vue({
-  render: h => h(App)
+  render: h => h(Terminal)
 }).$mount("#app");
