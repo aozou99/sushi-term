@@ -1,11 +1,11 @@
 import { Converter } from "./Converter";
-import { staticImplements } from "modules/decorator/class/staticImplements";
-import { EmojiList } from "modules/constants/EmojiList";
+import { staticImplements } from "modules/decorators/class/staticImplements";
+import { EmojiMap } from "modules/constants/EmojiMap";
 
 @staticImplements<Converter>()
 export class EmojiConverter {
   public static convert(word: string): string {
-    return EmojiList[word] || word;
+    return EmojiMap[word] || word;
   }
 
   public static convertAll(wordList: string[]): string[] {

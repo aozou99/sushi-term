@@ -1,4 +1,4 @@
-export const EmojiList: { [key: string]: string } = {
+export const EmojiMap: { [key: string]: string } = {
   sushi: "🍣",
   otya: "🍵",
   oden: "🍢",
