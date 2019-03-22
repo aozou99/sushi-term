@@ -1,6 +1,6 @@
 # 🍣sushi-term🍣
 
-##　CircleCI
+## CircleCI
 https://circleci.com/dashboard
 
 ## Project setup
