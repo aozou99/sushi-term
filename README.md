@@ -1,4 +1,7 @@
-# wterminal
+# 🍣sushi-term🍣
+
+##　CircleCI
+https://circleci.com/dashboard
 
 ## Project setup
 ```
