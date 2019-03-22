@@ -10,6 +10,10 @@
     "ts-node": "ts-node -r tsconfig-paths/register"
   },
   "dependencies": {
+    "array-compressor": "^1.0.4",
+    "localstorage-ponyfill": "^1.0.2",
+    "rich-logger-decorator": "^4.0.0",
+    "ts-log-class": "^1.0.19",
     "vue": "^2.6.6",
     "vue-class-component": "^6.0.0",
     "vue-property-decorator": "^7.0.0"
@@ -19,8 +23,8 @@
     "@vue/cli-plugin-babel": "^3.4.0",
     "@vue/cli-plugin-eslint": "^3.4.0",
     "@vue/cli-plugin-typescript": "^3.4.0",
-    "@vue/cli-plugin-unit-jest": "^3.4.0",
-    "@vue/cli-service": "^3.4.0",
+    "@vue/cli-plugin-unit-jest": "^3.5.1",
+    "@vue/cli-service": "^3.5.1",
     "@vue/eslint-config-prettier": "^4.0.1",
     "@vue/eslint-config-typescript": "^4.0.0",
     "@vue/test-utils": "^1.0.0-beta.20",

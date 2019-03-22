@@ -13,6 +13,8 @@
 
 <script lang="ts">
 import { Component, Vue, Prop, Emit, Watch } from "vue-property-decorator";
+import { createLocalStorage } from "localstorage-ponyfill";
+const localStorage = createLocalStorage();
 
 @Component
 export default class InputLine extends Vue {
@@ -20,17 +22,52 @@ export default class InputLine extends Vue {
   public prefix: string = "$ ";
   private lineW: number = 0;
   private prefixW: number = 0;
-  private inputW: number = 0;
+  private history: string[] = [];
+  private histIdx: number = 0;
 
+  /**
+   * @lifecycle
+   */
   public mounted() {
-    this.getHTMLElement("input").focus();
-    this.lineW = this.getHTMLElement("line").offsetWidth;
+    // コマンド履歴をLocalstrageから取得
+    const localHistroy = localStorage.getItem("history");
+    if (localHistroy !== null) {
+      this.history = JSON.parse(localHistroy) as string[];
+      this.histIdx = this.history.length;
+    }
+    // 入力フォームにフォーカス設定
+    this.handleFocusInput();
+    // 入力フォームのwidth調整用
+    this.lineW = window.innerWidth;
     this.prefixW = this.getHTMLElement("prefix").offsetWidth;
-    this.inputW = this.getHTMLElement("input").offsetWidth;
+    // イベント設定
+    window.addEventListener("resize", this.handleResize);
+    window.addEventListener("keydown", this.handleFocusInput);
+  }
+
+  /**
+   * @lifecycle
+   */
+  public beforeDestroy() {
+    window.removeEventListener("resize", this.handleResize);
+    window.removeEventListener("keydown", this.handleFocusInput);
   }
 
   public width() {
-    return `${this.lineW - this.prefixW - 2}px`;
+    return `${this.lineW - this.prefixW - 20}px`;
+  }
+
+  private handleResize() {
+    this.lineW = window.innerWidth;
+  }
+
+  private handleFocusInput(event?: KeyboardEvent) {
+    if (event) {
+      if (event.ctrlKey || event.altKey || event.metaKey || event.shiftKey) {
+        return;
+      }
+    }
+    this.getHTMLElement("input").focus();
   }
 
   public getHTMLElement(key: string): HTMLElement {
@@ -40,14 +77,29 @@ export default class InputLine extends Vue {
   @Emit()
   public enter(command: string, prefix: string) {}
 
-  @Watch("command")
-  public convertEmoji() {}
-
   public onKeyUp(event: KeyboardEvent) {
     switch (event.key.toLowerCase()) {
       case "enter":
+        // イベント通知
         this.enter(this.command, this.prefix);
+        // コマンド履歴保存
+        this.history.push(this.command);
+        localStorage.setItem("history", JSON.stringify(this.history));
+        // コマンドリセット
         this.command = "";
+        this.histIdx = this.history.length;
+        break;
+      case "arrowup":
+        if (this.histIdx > 0) {
+          this.histIdx--;
+          this.command = this.history[this.histIdx];
+        }
+        break;
+      case "arrowdown":
+        if (this.histIdx < this.history.length) {
+          this.histIdx++;
+          this.command = this.history[this.histIdx];
+        }
         break;
 
       default:

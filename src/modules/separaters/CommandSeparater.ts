@@ -10,6 +10,10 @@ import { CommandGenerator } from "modules/generators/CommandGenerator";
 
 @staticImplements<ISeparater>()
 export class CommandSeparater {
+  /**
+   * 入力された1行テキストからコマンド/演算子の単位で分割して返却します
+   * @param text
+   */
   public static separate(text: string): Array<Command | Operator> {
     const statck: Array<Command | Operator> = [];
     const separated = CommandSeparater.separateBy(text, listOperators());
@@ -39,7 +43,7 @@ export class CommandSeparater {
 
   /**
    * "cmdA && cmdB optionA || cmdC"を↓のように分割します
-   * ["cmdA", "&&", "cmdB optionA", "||" "cmdC"]
+   * ["cmdA", "&&", "cmdB optionA", "||", "cmdC"]
    * @param text
    * @param delimiters
    */

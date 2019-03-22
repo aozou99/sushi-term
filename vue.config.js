@@ -1,3 +1,12 @@
+const path = require("path");
 module.exports = {
-  publicPath: "./"
+  publicPath: "./",
+
+  configureWebpack: {
+    resolve: {
+      alias: {
+        modules: path.resolve(__dirname, "src/modules")
+      }
+    }
+  }
 };
