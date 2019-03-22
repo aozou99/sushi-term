@@ -10,14 +10,14 @@
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
     "sourceMap": true,
-    "baseUrl": "./src",
+    "baseUrl": "./",
     "types": [
       "webpack-env",
       "jest"
     ],
     "paths": {
-      "@/*": [
-        "src/*"
+      "modules/*": [
+        "src/modules/*"
       ]
     },
     "lib": [

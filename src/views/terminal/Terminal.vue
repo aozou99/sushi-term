@@ -23,11 +23,12 @@ import { CommandManager } from "modules/managers/CommandManager";
 export default class Terminal extends Vue {
   private history: object[] = [];
   public mounted() {
-    console.log("mounted!");
     CommandManager.init(this.history);
   }
   public exec(command: string, prefix: string) {
-    if (CommandManager.manage(command) === 0) {
+    if (command.length > 0) {
+      CommandManager.manage(command);
+    } else {
       this.history.push({ content: "", prefix });
     }
   }

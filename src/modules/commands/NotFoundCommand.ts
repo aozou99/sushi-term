@@ -6,11 +6,11 @@ export class NotFoundCommand extends Command {
   static readonly MAIN_OPTIONS: Readonly<Types.Options> = {};
   static readonly SUB_COMMANDS: ReadonlyArray<string> = [];
   static readonly SUB_OPTIONS: Readonly<Types.Options> = {};
-  public constructor(args: string[], command:string) {
+  public constructor(args: string[], command: string) {
     super(command, args, NotFoundCommand);
   }
 
   public execute(system: System) {
-    system.error(`${this.command}: command not found`);
+    system.out(`😇 : ${this.command}: command not found`);
   }
 }

@@ -1,7 +1,9 @@
 import { CommandSeparater } from "modules/separaters/CommandSeparater";
 import { Operator } from "modules/operators/CommandOperator";
 import { System } from "modules/systems/Sysytem";
+import log from "ts-log-class";
 
+@log()
 export class CommandManager {
   public static system: System;
 
@@ -9,9 +11,8 @@ export class CommandManager {
     CommandManager.system = new System(output);
   }
 
-  public static manage(input: string): number {
-    const separated = CommandSeparater.separate(input);
-    for (const cmdOrOp of separated) {
+  public static manage(input: string): void {
+    for (const cmdOrOp of CommandSeparater.separate(input)) {
       console.log(cmdOrOp);
       switch (cmdOrOp) {
         case Operator.Ampersand:
@@ -31,6 +32,5 @@ export class CommandManager {
           break;
       }
     }
-    return separated.length;
   }
 }
