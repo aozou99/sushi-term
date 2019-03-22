@@ -1,3 +1,5 @@
+import { Command } from "modules/commands/Command";
+
 export namespace Types {
   export type Options = {
     [key: string]: string | undefined;
@@ -9,3 +11,6 @@ export namespace Types {
     subArgs: string[];
   };
 }
+export type CommandImpl = {
+  new (args: string[]): Command;
+};

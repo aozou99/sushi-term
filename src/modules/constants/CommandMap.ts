@@ -1,5 +1,8 @@
-import { Command } from "modules/commands/Command";
+import { TaisyoCommand } from "modules/commands/TaisyoCommand";
+import { CommandImpl } from "./Types";
 
 export const CommandMap: {
-  [key: string]: { new (command: string, args: string[]): Command };
-} = {};
+  [key: string]: CommandImpl;
+} = {
+  taisyo: TaisyoCommand
+};

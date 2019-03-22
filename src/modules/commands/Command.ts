@@ -1,6 +1,7 @@
 import { ICommand } from "./interface/ICommand";
 import { CommandParser } from "modules/parser/CommandParser";
 import { Types } from "modules/constants/Types";
+import { System } from "modules/systems/Sysytem";
 
 export abstract class Command {
   readonly parsedArgs: Types.ParsedArgs;
@@ -13,5 +14,5 @@ export abstract class Command {
     this.parsedArgs = CommandParser.parse(define, args);
   }
 
-  public abstract execute(): void;
+  public abstract execute(system: System): void;
 }

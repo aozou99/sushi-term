@@ -10,6 +10,8 @@
     "ts-node": "ts-node -r tsconfig-paths/register"
   },
   "dependencies": {
+    "@types/log4js": "^2.3.5",
+    "log4js": "^4.0.2",
     "vue": "^2.6.6",
     "vue-class-component": "^6.0.0",
     "vue-property-decorator": "^7.0.0"

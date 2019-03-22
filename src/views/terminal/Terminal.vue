@@ -13,6 +13,7 @@
 import { Component, Vue, Watch, Prop } from "vue-property-decorator";
 import InputLine from "./components/InputLine.vue";
 import HistoryLine from "./components/HistoryLine.vue";
+import { CommandManager } from "modules/managers/CommandManager";
 @Component({
   components: {
     InputLine,
@@ -20,10 +21,15 @@ import HistoryLine from "./components/HistoryLine.vue";
   }
 })
 export default class Terminal extends Vue {
-  private history: Array<object> = [];
-
+  private history: object[] = [];
+  public mounted() {
+    console.log("mounted!");
+    CommandManager.init(this.history);
+  }
   public exec(command: string, prefix: string) {
-    this.history.push({ command, prefix });
+    if (CommandManager.manage(command) === 0) {
+      this.history.push({ content: "", prefix });
+    }
   }
 }
 </script>
