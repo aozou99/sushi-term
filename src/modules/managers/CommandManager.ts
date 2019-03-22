@@ -1,9 +1,7 @@
 import { CommandSeparater } from "modules/separaters/CommandSeparater";
 import { Operator } from "modules/operators/CommandOperator";
 import { System } from "modules/systems/Sysytem";
-import log from "ts-log-class";
 
-@log()
 export class CommandManager {
   public static system: System;
 

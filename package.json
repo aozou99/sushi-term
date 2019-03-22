@@ -13,7 +13,6 @@
     "array-compressor": "^1.0.4",
     "localstorage-ponyfill": "^1.0.2",
     "rich-logger-decorator": "^4.0.0",
-    "ts-log-class": "^1.0.19",
     "vue": "^2.6.6",
     "vue-class-component": "^6.0.0",
     "vue-property-decorator": "^7.0.0"

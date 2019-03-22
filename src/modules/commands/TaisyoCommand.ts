@@ -1,9 +1,7 @@
 import { Command } from "./Command";
 import { Types } from "modules/constants/Types";
 import { System } from "modules/systems/Sysytem";
-import log from "ts-log-class";
 
-@log()
 export class TaisyoCommand extends Command {
   static readonly MAIN_OPTIONS: Readonly<Types.Options> = {};
   static readonly SUB_COMMANDS: ReadonlyArray<string> = ["order"];
