@@ -11,18 +11,21 @@ export class CommandManager {
 
   public static manage(input: string): void {
     for (const cmdOrOp of CommandSeparater.separate(input)) {
-      console.log(cmdOrOp);
       switch (cmdOrOp) {
         case Operator.Ampersand:
+          // TODO:いつかやりたい
           break;
 
         case Operator.And:
+          // TODO:いつかやりたい
           break;
 
         case Operator.Or:
+          // TODO:いつかやりたい
           break;
 
         case Operator.Semicolon:
+          // TODO:いつかやりたい
           break;
 
         default:

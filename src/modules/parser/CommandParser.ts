@@ -129,7 +129,7 @@ export class CommandParser {
     }
     // 大きい添字から削って整合性を保つ
     if (update) {
-      for (const i of spliceIdxs.reverse()) {
+      for (const i of spliceIdxs.sort((a, b) => b - a)) {
         originArgs.splice(i, 1);
       }
     }

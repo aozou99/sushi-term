@@ -26,10 +26,9 @@ export default class Terminal extends Vue {
     CommandManager.init(this.history);
   }
   public exec(command: string, prefix: string) {
+    this.history.push({ content: command, prefix });
     if (command.length > 0) {
       CommandManager.manage(command);
-    } else {
-      this.history.push({ content: "", prefix });
     }
   }
 }

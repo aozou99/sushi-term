@@ -1,18 +1,18 @@
 import { EmojiReplacer } from "modules/replacers/EmojiReplacer";
-import { EmojiMap } from "modules/constants/EmojiMap";
+import { MenuPhotos } from "modules/constants/Menu";
 
 describe("EmojiReplacer", () => {
   describe("replace()", () => {
     it("絵文字に置換されていること", () => {
-      for (const before of Object.keys(EmojiMap)) {
+      for (const before of Object.keys(MenuPhotos)) {
         const after = EmojiReplacer.replace(before);
-        expect(after).toBe(EmojiMap[before]);
+        expect(after).toBe(MenuPhotos[before]);
       }
     });
     it("対象外の文字は置換されないこと", () => {
-      for (const before of Object.keys(EmojiMap)) {
-        const expected1 = `${EmojiMap[before]}_`;
-        const expected2 = `_${EmojiMap[before]}`;
+      for (const before of Object.keys(MenuPhotos)) {
+        const expected1 = `${MenuPhotos[before]}_`;
+        const expected2 = `_${MenuPhotos[before]}`;
         const after1 = EmojiReplacer.replace(expected1);
         const after2 = EmojiReplacer.replace(expected2);
         expect(after1).toBe(expected1);
@@ -22,14 +22,14 @@ describe("EmojiReplacer", () => {
   });
   describe("replaceAll()", () => {
     it("絵文字に置換されていること", () => {
-      const after = EmojiReplacer.replaceAll(Object.keys(EmojiMap));
-      expect(after).toEqual(Object.values(EmojiMap));
+      const after = EmojiReplacer.replaceAll(Object.keys(MenuPhotos));
+      expect(after).toEqual(Object.values(MenuPhotos));
     });
     it("対象外の文字は置換されないこと", () => {
-      const after = EmojiReplacer.replaceAll(Object.keys(EmojiMap)).push(
+      const after = EmojiReplacer.replaceAll(Object.keys(MenuPhotos)).push(
         "hoge"
       );
-      expect(after).toEqual(Object.values(EmojiMap).push("hoge"));
+      expect(after).toEqual(Object.values(MenuPhotos).push("hoge"));
     });
   });
 });
