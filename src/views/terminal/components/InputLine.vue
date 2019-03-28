@@ -29,7 +29,7 @@ export default class InputLine extends Vue {
    * @lifecycle
    */
   public mounted() {
-    // コマンド履歴をLocalstrageから取得
+    // コマンド履歴をLocalstorageから取得
     const localHistroy = localStorage.getItem("command_history");
     if (localHistroy !== null) {
       this.history = JSON.parse(localHistroy) as string[];

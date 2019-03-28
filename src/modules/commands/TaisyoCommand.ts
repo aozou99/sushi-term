@@ -154,11 +154,16 @@ export class TaisyoCommand extends Command {
         }
       }
     }
-
     // 引数なしの場合は処理終了
-    if (!subArgs) return;
+    if (
+      Object.keys(counts).filter(v => v != "all").length === 0 &&
+      subArgs.length === 0
+    ) {
+      system.out(`${prefix} 食べたいものを注文しておくれやす.`);
+      return;
+    }
     // 注文品をチェック
-    const noLabels = Object.keys(counts).filter(v => !MenuMap[v]);
+    const noLabels = Object.keys(counts).filter(v => v != "all" && !MenuMap[v]);
     const exists = subArgs.filter(v => EmojiConverter.convert(v, true));
     const noExists = subArgs
       .filter(v => !EmojiConverter.convert(v, true))
