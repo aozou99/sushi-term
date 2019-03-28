@@ -66,7 +66,7 @@ export class CommandSeparater {
     }
     return Array.prototype.concat
       .apply([], stack)
-      .filter(v => v !== "")
-      .map(v => v.trim());
+      .filter((v: string) => v !== "")
+      .map((v: string) => v.trim());
   }
 }

@@ -1,11 +1,14 @@
 import { Converter } from "./Converter";
 import { staticImplements } from "modules/decorators/class/staticImplements";
-import { EmojiMap } from "modules/constants/EmojiMap";
+import { MenuPhotos } from "modules/constants/Menu";
 
 @staticImplements<Converter>()
 export class EmojiConverter {
-  public static convert(word: string): string {
-    return EmojiMap[word] || word;
+  public static convert(word: string, strict: boolean = false): string {
+    if (strict) {
+      return MenuPhotos[word];
+    }
+    return MenuPhotos[word] || word;
   }
 
   public static convertAll(wordList: string[]): string[] {

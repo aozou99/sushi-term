@@ -4,6 +4,9 @@ export namespace Types {
   export type Options = {
     [key: string]: string | undefined;
   };
+  export type OrderLabel = {
+    [key: string]: number;
+  };
   export type ParsedArgs = {
     mainOptions: Types.Options;
     subCommand: string | undefined;

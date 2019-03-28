@@ -30,7 +30,7 @@ export default class InputLine extends Vue {
    */
   public mounted() {
     // コマンド履歴をLocalstrageから取得
-    const localHistroy = localStorage.getItem("history");
+    const localHistroy = localStorage.getItem("command_history");
     if (localHistroy !== null) {
       this.history = JSON.parse(localHistroy) as string[];
       this.histIdx = this.history.length;
@@ -54,7 +54,7 @@ export default class InputLine extends Vue {
   }
 
   public width() {
-    return `${this.lineW - this.prefixW - 20}px`;
+    return `${this.lineW - this.prefixW - 35}px`;
   }
 
   private handleResize() {
@@ -84,7 +84,7 @@ export default class InputLine extends Vue {
         this.enter(this.command, this.prefix);
         // コマンド履歴保存
         this.history.push(this.command);
-        localStorage.setItem("history", JSON.stringify(this.history));
+        localStorage.setItem("command_history", JSON.stringify(this.history));
         // コマンドリセット
         this.command = "";
         this.histIdx = this.history.length;
