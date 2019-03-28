@@ -12,7 +12,11 @@ import {
 
 export class TaisyoCommand extends Command {
   static readonly MAIN_OPTIONS: Readonly<Types.Options> = {};
-  static readonly SUB_COMMANDS: ReadonlyArray<string> = ["order", "menu", "bill"];
+  static readonly SUB_COMMANDS: ReadonlyArray<string> = [
+    "order",
+    "menu",
+    "bill"
+  ];
   static readonly SUB_OPTIONS: Readonly<Types.Options> = {
     "-n": "string",
     "-r": undefined
@@ -58,36 +62,45 @@ export class TaisyoCommand extends Command {
     _subOptions: Types.Options,
     _subArgs: string[],
     localStorage: LocalStoragePonyfill
-  ):void {
+  ): void {
     // 累計注文数
-    const orderHistory:Types.OrderLabel = JSON.parse(localStorage.getItem("order_history") || '{}');
+    const orderHistory: Types.OrderLabel = JSON.parse(
+      localStorage.getItem("order_history") || "{}"
+    );
     // 支払い済み注文数
-    const billHistory:Types.OrderLabel = JSON.parse(localStorage.getItem("bill_history")|| '{}');
+    const billHistory: Types.OrderLabel = JSON.parse(
+      localStorage.getItem("bill_history") || "{}"
+    );
     // 会計
     system.out(`${prefix} あいよ!`);
     let totalBill = 0;
-    _.each(orderHistory, (num, meal)=> {
-      if(billHistory[meal]===undefined) billHistory[meal] = 0;
-      const shouldBillOrder = (num - billHistory[meal]);
-      if(shouldBillOrder > 0) {
+    _.each(orderHistory, (num, meal) => {
+      if (billHistory[meal] === undefined) billHistory[meal] = 0;
+      const shouldBillOrder = num - billHistory[meal];
+      if (shouldBillOrder > 0) {
         const bill = shouldBillOrder * MenuPrices[meal];
-        system.out(`${MenuPhotos[meal]} : ${shouldBillOrder} ✖ ${MenuPrices[meal]} = ${bill.toLocaleString()}円`);
-        totalBill+=bill;
+        system.out(
+          `${MenuPhotos[meal]} : ${shouldBillOrder} ✖ ${
+            MenuPrices[meal]
+          } = ${bill.toLocaleString()}円`
+        );
+        totalBill += bill;
         // 支払い分を追記
-        billHistory[meal]+=shouldBillOrder;
+        billHistory[meal] += shouldBillOrder;
       }
-    })
+    });
     // 出力
     if (totalBill > 0) {
-      system.out(`${prefix} 毎度！しめて合計で<b>${totalBill.toLocaleString()}</b>円だよ！`);
+      system.out(
+        `${prefix} 毎度！しめて合計で<b>${totalBill.toLocaleString()}</b>円だよ！`
+      );
     } else {
       system.out(`${prefix} って何も食ってないんかーい！`);
     }
-    system.out(`&nbsp;`)
+    system.out(`&nbsp;`);
     // 精算分を記録
-    localStorage.setItem('bill_history', JSON.stringify(billHistory));
+    localStorage.setItem("bill_history", JSON.stringify(billHistory));
   }
-
 
   /**
    * #### サブコマンド `menu`
@@ -145,19 +158,19 @@ export class TaisyoCommand extends Command {
     // 引数なしの場合は処理終了
     if (!subArgs) return;
     // 注文品をチェック
-    const noLabels = Object.keys(counts).filter(v=>!MenuMap[v]);
+    const noLabels = Object.keys(counts).filter(v => !MenuMap[v]);
     const exists = subArgs.filter(v => EmojiConverter.convert(v, true));
     const noExists = subArgs
       .filter(v => !EmojiConverter.convert(v, true))
       .concat(noLabels)
       .join();
-    //　メニューにないものは削除
-    _.each(noLabels, v=>delete counts[v]);
+    // メニューにないものは削除
+    _.each(noLabels, v => delete counts[v]);
     // メニューに無いものを注文した場合
     if (noExists.length > 0) {
       system.out(`${prefix} ${noExists} なんてのはメニューにないねぇ.`);
     }
-    //　引数に同じものが複数注文された場合の考慮
+    // 引数に同じものが複数注文された場合の考慮
     for (const item of exists) {
       counts[item] = counts[item] ? counts[item] + 1 : 1;
     }
