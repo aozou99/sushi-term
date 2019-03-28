@@ -1,7 +1,8 @@
 # 🍣sushi-term🍣
+[![CircleCI](https://circleci.com/gh/aozou99/sushi-term.svg?style=svg)](https://circleci.com/gh/aozou99/sushi-term)
 
-## CircleCI
-https://circleci.com/dashboard
+## Let's order Sushi!
+https://aozou99.github.io/sushi-term/
 
 ## Project setup
 ```
@@ -10,28 +11,20 @@ yarn install
 
 ### Compiles and hot-reloads for development
 ```
-yarn run serve
+yarn serve
 ```
 
 ### Compiles and minifies for production
 ```
-yarn run build
+yarn build
 ```
 
-### Run your tests
+### Run your unit tests
 ```
-yarn run test
+yarn test:unit
 ```
 
 ### Lints and fixes files
 ```
 yarn run lint
 ```
-
-### Run your unit tests
-```
-yarn run test:unit
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
